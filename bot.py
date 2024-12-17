@@ -17,12 +17,12 @@ class queue_item:
 
 
 queue = []
-
+audio_folder = os.environ["AUDIO_FOLDER"]
 
 def next_file():
-    if not os.path.isdir("./audio"):
-        os.mkdir("./audio")
-    return f"./audio/{time.time_ns()}"
+    if not os.path.isdir(audio_folder):
+        os.mkdir(audio_folder)
+    return f"{audio_folder}/{time.time_ns()}"
 
 
 async def download_audio(youtube_url, output_file):
@@ -54,16 +54,16 @@ async def queue_push(youtube_url, ctx):
     return len(queue)
 
 def cleanup_files():
-    for f in os.listdir("./audio"):
+    for f in os.listdir(audio_folder):
         found = False
         for q in queue:
             print(f"[cleanup_files] checking {q.output_file}.mp3 against {f}")
-            if f"{q.output_file}.mp3" == f"./audio/{f}":
+            if f"{q.output_file}.mp3" == f"{audio_folder}/{f}":
                 found = True
                 break
         if not found:
-            print(f"[cleanup_files] removing: ./audio/{f}")
-            os.remove(f"./audio/{f}")
+            print(f"[cleanup_files] removing: {audio_folder}/{f}")
+            os.remove(f"{audio_folder}/{f}")
 
 # setup bot
 intents = discord.Intents.default()
@@ -137,4 +137,3 @@ async def play(ctx, yt_url: str):
 
 
 bot.run(os.environ["BOT_TOKEN"])
-
