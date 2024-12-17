@@ -9,11 +9,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 RUN useradd -ms /bin/bash apprunner
 
-RUN pip3 install -g yt_dlp\
-    && pip3 install -g asyncio\
-    && pip3 install -g typing\
-    && pip3 install -g dataclasses\
-    && pip3 install -g discord
+RUN pip3 install yt_dlp\
+    && pip3 install asyncio\
+    && pip3 install typing\
+    && pip3 install dataclasses\
+    && pip3 install discord
 
 USER apprunner
 
