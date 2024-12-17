@@ -13,7 +13,8 @@ RUN pip3 install yt_dlp\
     && pip3 install asyncio\
     && pip3 install typing\
     && pip3 install dataclasses\
-    && pip3 install discord
+    && pip3 install discord\
+    && pip3 install pynacl
 
 USER apprunner
 
